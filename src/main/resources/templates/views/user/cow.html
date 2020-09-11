@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Offspring</title>
+</head>
+<body>
+<form method="post" th:action="@{/user/cow}">
+    <button type="submit">+</button>
+</form>
+================================================
+Update
+<!--/*@thymesVar id="cowToUpdate" type="com.bsuir.diploma.diploma.domain.db.cattle.Cow"*/-->
+<form method="post" th:action="@{/user/cow/update}" th:object="${cowToUpdate}">
+    Id: <input type="number" th:field="*{id}"/>
+    Vaccation history  <input type="text" th:field="*{historyVaccination}">
+    <button type="submit">Update</button>
+</form>
+===================================================================
+Remove
+<form method="get" th:action="@{/user/cow}">
+    Id : <input name="id" type="number"/>
+        <button type="submit">Remove</button>
+</form>
+</body>
+</html>

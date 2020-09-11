@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <th>date from</th>
+        <th>date to</th>
+        <th>full name</th>
+        <th>Status</th>
+    </tr>
+    <form method="post" th:action="@{/admin/vacation/update}" th:object="${vac}">
+        <tr th:each="vacation, itemStat : ${vacations}">
+            <td th:text="${vacation.dateFrom}"></td>
+                <input type="hidden" id="dateFrom" th:value="${vacation.dateFrom}" th:field="*{dateFrom}"/>
+            <td th:text="${vacation.dateTo}"></td>
+                <input type="hidden" id="dateTo" th:value="${vacation.dateTo}" th:field="*{dateTo}"/>
+            <td th:text="${vacation.employee.fullName}"></td>
+                <input type="hidden" id="fullName" th:value="${vacation.employee.fullName}"/>
+            <td>
+                <button id="accepted" value="accepted" type="submit">Accepted</button>
+                <button id="rejected" value="rejected" type="submit">Rejected</button>
+            </td>
+        </tr>
+    </form>
+</table>
+
+<script>
+    $(document).ready(function(){
+        $("#accepted").click(function () {
+            var dateFrom = $("#dateFrom").val();
+            var dateTo = $("#dateTo").val();
+            var fullName = $("#fullName").val();
+
+            $.post("http://localhost/admin/vacation", { dateFrom: dateFrom, dateTo: dateTo, fullName: fullName })
+                .done(function(data) {
+                    alert("Data Loaded: " + data);
+                });
+
+        });
+
+        $("#rejected").click(function () {
+            $("#dateFrom").val('');
+            $("#dateTo").val('');
+            $("#fullName").val('');
+        });
+    });
+</script>
+</body>
+</html>

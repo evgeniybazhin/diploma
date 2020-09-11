@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{/fields/update}" th:object="${field}">
+    Location <select th:field="*{location}">
+                <option th:each="field : ${fields}" th:value="${field.location}" th:text="${field.location}"></option>
+             </select>
+    Status   <select th:field="*{status}">
+                <option value="INPROGRESS">in progress</option>
+                <option value="REMOVED">removed</option>
+                <option value="CULTURED">cultured</option>
+                <option value="PLOWED">plowed</option>
+             </select>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

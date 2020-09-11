@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cattle</title>
+</head>
+<body>
+Total count of cow - <b th:text="${cows.size()}"></b>
+Total count of bull - <b th:text="${bull.size()}"></b>
+<form method="get" th:action="@{/admin/cattle}">
+    <select name="location">
+        <option th:each="farm : ${farms}" th:text="${farm.location}" th:value="${farm.location}"></option>
+    </select>
+    <button type="submit">Get info</button>
+</form>
+<table border="1px" th:if="${farm != null}">
+    <tr>
+        <th>id</th>
+        <th>vaccation history</th>
+    </tr>
+    <tr th:each="cow : ${farm.getCows()}">
+        <td th:text="${cow.id}"></td>
+        <td th:text="${cow.historyVaccination}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

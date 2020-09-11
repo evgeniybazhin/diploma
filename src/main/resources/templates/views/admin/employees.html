@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+Total count employees - <p th:text="${employees.size()}"></p>
+<form method="get" th:action="@{/admin/employees}">
+    Name <input type="text" name="name"/>
+    <button type="submit">Get</button>
+</form>
+<table border="1px" th:if="${employeeList != null && employeeList.size() > 0}">
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Position</th>
+        <th>Salary</th>
+    </tr>
+    <tr th:each="employee : ${employeeList}">
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.position}"></td>
+        <td th:text="${employee.salary}"></td>
+    </tr>
+</table>
+<table border="1px" th:if="${(employeeList == null ||employeeList.size() == 0) && employees != null && employees.size() > 0}">
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Position</th>
+        <th>Salary</th>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.firstName}"></td>
+        <td th:text="${employee.lastName}"></td>
+        <td th:text="${employee.position}"></td>
+        <td th:text="${employee.salary}"></td>
+    </tr>
+</table>
+</body>
+</html>
